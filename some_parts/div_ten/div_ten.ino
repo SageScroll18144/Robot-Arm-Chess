@@ -22,7 +22,7 @@ void loop() {
 }
 
 long get_resistence(int pin){
-  double U2 = tensao * analogRead(pin) / 1023;
+  long U2 = tensao * analogRead(pin) / 1023;
   return (long)(tensao * R2 / U2 - R2);
 }
 void upd_mat(){
