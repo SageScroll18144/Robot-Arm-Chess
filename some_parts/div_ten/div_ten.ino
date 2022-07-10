@@ -16,7 +16,7 @@ void loop() {
   Serial.println(get_resistence(A0));
 }
 
-int get_resistence(int pin){
+double get_resistence(int pin){
   double U2 = tensao * analogRead(pin) / 1023;
   return ((tensao * R2 / U2) - R2);
 }
