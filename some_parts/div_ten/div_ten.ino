@@ -1,4 +1,4 @@
-const int tensao = 5;//Volts 
+const double tensao = 5;//Volts 
 const double R2 = 2200;//Ohms
 double R1;
 
@@ -9,21 +9,16 @@ const int pin_piece[32] = {A0};
 bool turn = false;
 
 void setup() {
-  upd_mat();
-  last_state();  
+  Serial.begin(9600);
 }
 
 void loop() {
-  upd_mat();
-  if(hasAMovement()){
-    last_state();
-    //Envia para a I.A.
-  }
+  Serial.println(get_resistence(A0));
 }
 
-long get_resistence(int pin){
-  long U2 = tensao * analogRead(pin) / 1023;
-  return (long)(tensao * R2 / U2 - R2);
+int get_resistence(int pin){
+  double U2 = tensao * analogRead(pin) / 1023;
+  return ((tensao * R2 / U2) - R2);
 }
 void upd_mat(){
   int cnt = 0;
