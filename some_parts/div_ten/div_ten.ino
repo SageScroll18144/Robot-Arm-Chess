@@ -1,38 +1,33 @@
-const double tensao = 5;//Volts 
-const double R2 = 2200;//Ohms
-double R1;
+//table
+const double voltage = 5;//Volts 
+const double R2 = 1000;//1k Ohms
+typedef struct Piece{
+  double value;
+  char whichone;
+}piece;
 
+piece pieces[12];//Tabela 12 tipos de peças diferentes.
+
+//board
 long mat_resistors[8][8];
 long mat_copy[8][8];
 const int pin_piece[32] = {A0};
 
+//main game
 bool turn = false;
 
 void setup() {
   Serial.begin(9600);
+  build_list_of_piece();
 }
 
 void loop() {
-  Serial.println(get_resistence(A0));
-}
-
-double get_resistence(int pin){
-  double U2 = tensao * analogRead(pin) / 1023;
-  return ((tensao * R2 / U2) - R2);
-}
-void upd_mat(){
-  int cnt = 0;
-  for(int i=0;i<8;i++) for(int j=0;j<8;j++) {
-    mat_resistors[i][j] = get_resistence(pin_piece[cnt]);
-    cnt++;
+  //Serial.println(get_resistence(A0));
+  
+  //Só de debug
+  int a[] = {A0, A1, A2};
+  for(int i=0;i<sizeof(a)/sizeof(int);i++){
+    print_piece(a[i]);
   }
-}
-void last_state(){for(int i=0;i<8;i++) for(int j=0;j<8;j++) mat_copy[i][j]=mat_resistors[i][j];}
-bool hasAMovement(){
-  for(int i=0;i<8;i++) for(int j=0;j<8;j++) {
-    if(mat_copy[i][j]!=mat_resistors[i][j]){
-      return true;
-    }
-  }
-  return false;
+  Serial.println();
 }
