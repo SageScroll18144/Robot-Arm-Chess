@@ -45,7 +45,7 @@ void build_list_of_piece(){
   n.whichone = 'K';
   pieces[9] = n;
 
-  n.value = 1200.0;
+  n.value = 12000.0;
   n.whichone = 'Q';
   pieces[10] = n;
 
