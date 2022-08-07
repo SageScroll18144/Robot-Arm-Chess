@@ -1,5 +1,6 @@
 double get_resistence(int pin){
   double U2 = voltage * analogRead(pin) / 1023;
+  if(U2==0.0) return 0.0;
   return ((voltage * R2 / U2) - R2);
 }
 double get_analog_resistence(int pin){
@@ -58,13 +59,15 @@ void build_list_of_piece(){
   pieces[11] = n;
 }
 char which_piece(double res_value){
-  for(int i=0;i<12;i++){
-    double x = pieces[i].value;
-    if(res_value>=0.95*x && res_value<=1.05*x){
-      return pieces[i].whichone;
+  if(res_value>0){
+    for(int i=0;i<12;i++){
+      double x = pieces[i].value;
+      if(res_value>=0.95*x && res_value<=1.05*x){
+        return pieces[i].whichone;
+      }
     }
   }
-  return 'x';
+  else return 'x';
 }
 void print_piece(int pin){
   Serial.print(which_piece(get_analog_resistence(pin)));
