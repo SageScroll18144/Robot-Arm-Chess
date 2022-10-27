@@ -54,20 +54,19 @@ void build_list_of_piece(){
   n.whichone = 'Q';
   pieces[10] = n;
 
-  n.value = 20;//47000.0
+  n.value = 22;//47000.0
   n.whichone = 'P';
   pieces[11] = n;
 }
 char which_piece(double res_value){
-  if(res_value>0){
-    for(int i=0;i<12;i++){
-      double x = pieces[i].value;
-      if(res_value>=0.95*x && res_value<=1.05*x){
-        return pieces[i].whichone;
-      }
+  char ans = 'x';
+  for(int i=0;i<12;i++){
+    double x = pieces[i].value;
+    if(res_value>=0.90*x && res_value<=1.10*x){
+      ans = pieces[i].whichone;
     }
   }
-  else return 'x';
+  return ans;
 }
 void print_piece(int pin){
   Serial.print(which_piece(get_analog_resistence(pin)));
