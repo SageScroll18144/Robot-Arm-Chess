@@ -25,9 +25,15 @@ void loop() {
   //Serial.println(get_resistence(A0));
   
   //Só de debug
-  int a[] = {A0, A1, A2};
+  int a[] = {A0, A1, A2, A3};
   for(int i=0;i<sizeof(a)/sizeof(int);i++){
+    Serial.print((int)get_analog_resistence(a[i]));
+    Serial.print(": ");
     print_piece(a[i]);
+    Serial.print(" ");
   }
   Serial.println();
+
+  /*for(int i=0;i<12;i++) Serial.print(pieces[i].whichone);
+  Serial.println();*/
 }
